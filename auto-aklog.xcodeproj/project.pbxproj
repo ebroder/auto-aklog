@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 42;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -129,7 +129,7 @@
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "auto-aklog" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* auto-aklog */;
 			projectDirPath = "";
@@ -226,7 +226,7 @@
 				INSTALL_PATH = "/Library/Kerberos Plug-Ins/";
 				MACH_O_TYPE = mh_bundle;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				WRAPPER_EXTENSION = loginLogout;
 			};
 			name = Debug;
@@ -245,7 +245,7 @@
 				INSTALL_PATH = "/Library/Kerberos Plug-Ins/";
 				MACH_O_TYPE = mh_bundle;
 				PREBINDING = NO;
-				SDKROOT = macosx10.5;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				WRAPPER_EXTENSION = loginLogout;
 			};
 			name = Release;
