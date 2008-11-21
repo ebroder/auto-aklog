@@ -1,4 +1,4 @@
 build
 .DS_Store
-auto-aklog.xcodeproj
-!auto-aklog.xcodeproj/project.pbxproj
+auto-aklog.xcodeproj/*.pbxuser
+auto-aklog.xcodeproj/*.mode*
