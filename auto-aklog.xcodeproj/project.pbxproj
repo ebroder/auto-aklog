@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		201B10E60F25D37400F77A06 /* auto-aklog.m in Sources */ = {isa = PBXBuildFile; fileRef = 201B10E50F25D37400F77A06 /* auto-aklog.m */; };
 		201B10F20F25D3CD00F77A06 /* Kerberos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201B10F10F25D3CD00F77A06 /* Kerberos.framework */; };
+		208361E80F32F8620032063B /* k4name_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 208361E70F32F8620032063B /* k4name_parse.c */; };
+		208361F90F3300B70032063B /* afs_princ.c in Sources */ = {isa = PBXBuildFile; fileRef = 208361F80F3300B70032063B /* afs_princ.c */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -20,6 +22,10 @@
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		201B10E50F25D37400F77A06 /* auto-aklog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "auto-aklog.m"; sourceTree = "<group>"; };
 		201B10F10F25D3CD00F77A06 /* Kerberos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kerberos.framework; path = /System/Library/Frameworks/Kerberos.framework; sourceTree = "<absolute>"; };
+		208361E60F32F8620032063B /* k4name_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = k4name_parse.h; sourceTree = "<group>"; };
+		208361E70F32F8620032063B /* k4name_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = k4name_parse.c; sourceTree = "<group>"; };
+		208361F70F3300B70032063B /* afs_princ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = afs_princ.h; sourceTree = "<group>"; };
+		208361F80F3300B70032063B /* afs_princ.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = afs_princ.c; sourceTree = "<group>"; };
 		32DBCF630370AF2F00C91783 /* auto-aklog_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "auto-aklog_Prefix.pch"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* auto-aklog.loginLogout */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "auto-aklog.loginLogout"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,6 +54,10 @@
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 				201B10E50F25D37400F77A06 /* auto-aklog.m */,
+				208361E60F32F8620032063B /* k4name_parse.h */,
+				208361E70F32F8620032063B /* k4name_parse.c */,
+				208361F70F3300B70032063B /* afs_princ.h */,
+				208361F80F3300B70032063B /* afs_princ.c */,
 			);
 			name = "auto-aklog";
 			sourceTree = "<group>";
@@ -167,6 +177,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				201B10E60F25D37400F77A06 /* auto-aklog.m in Sources */,
+				208361E80F32F8620032063B /* k4name_parse.c in Sources */,
+				208361F90F3300B70032063B /* afs_princ.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,8 +207,19 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "auto-aklog_Prefix.pch";
+				HEADER_SEARCH_PATHS = /Library/OpenAFS/Tools/include;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "/Library/Kerberos Plug-Ins";
+				LIBRARY_SEARCH_PATHS = (
+					/Library/OpenAFS/Tools/lib/afs,
+					/Library/OpenAFS/Tools/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-lafsauthent",
+					"-lafsrpc",
+					"-lafsutil",
+					"-lresolv",
+				);
 				PRODUCT_NAME = "auto-aklog";
 				WRAPPER_EXTENSION = loginLogout;
 			};
@@ -210,8 +233,19 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "auto-aklog_Prefix.pch";
+				HEADER_SEARCH_PATHS = /Library/OpenAFS/Tools/include;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "/Library/Kerberos Plug-Ins";
+				LIBRARY_SEARCH_PATHS = (
+					/Library/OpenAFS/Tools/lib/afs,
+					/Library/OpenAFS/Tools/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-lafsauthent",
+					"-lafsrpc",
+					"-lafsutil",
+					"-lresolv",
+				);
 				PRODUCT_NAME = "auto-aklog";
 				WRAPPER_EXTENSION = loginLogout;
 			};
