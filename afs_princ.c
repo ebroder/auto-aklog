@@ -128,5 +128,9 @@ int afs_princ(char ** princ) {
 	if (code)
 		return code;
 	
+	krb5_free_principal(context, k5princ);
+	afsconf_Close(tdir);
+	krb5_free_context(context);
+
 	return 0;
 }
