@@ -33,7 +33,7 @@ int afs_princ(char ** princ) {
 	
 	char confdir[AFSDIR_PATH_MAX];
 	struct afsconf_dir *tdir;
-	char cellstr[64];
+	char cellstr[MAXCELLCHARS];
 	struct afsconf_cell cellconfig;
 	
 	struct ktc_principal serviceName, clientName;
