@@ -40,7 +40,7 @@ KLStatus KerberosLoginNotification_Login(
 	// Apparently the OS X ccache API is /retarded/ and requires
 	// you to strip the "API:"
 	const char * shortCache = strchr(inCredentialsCache, ':');
-	if(!*(shortCache++)) return 0;
+	if(!shortCache || !(*++shortCache)) return 0;
 	
 	// Initialize a cc context
 	cc_int32 err = cc_initialize(&context, ccapi_version_4, nil, nil);
