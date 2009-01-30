@@ -6,8 +6,11 @@
 //  Copyright (c) Evan Broder, 2008
 //
 
+#include "afs_princ.h"
 #import <Kerberos/KLLoginLogoutNotification.h>
 #import <Kerberos/CredentialsCache.h>
+#include <afs/stds.h>
+#include <afs/auth.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -35,6 +38,8 @@ KLStatus KerberosLoginNotification_Login(
 	cc_context_t context = nil;
 	cc_ccache_t ccache = nil, defCcache = nil;
 	cc_string_t principal = nil, defPrincipal = nil;
+	char * token_princ = NULL;
+	int rc;
 	pid_t pid;
 	
 	// Apparently the OS X ccache API is /retarded/ and requires
@@ -52,27 +57,37 @@ KLStatus KerberosLoginNotification_Login(
 	if(err == ccNoError)
 		err = cc_ccache_get_principal(ccache, cc_credentials_v5, &principal);
 	
-	// Get the principal for the default CC
-	if(err == ccNoError)
-		err = cc_context_open_default_ccache(context, &defCcache);
-	if(err == ccNoError)
-		err = cc_ccache_get_principal(defCcache, cc_credentials_v5, &defPrincipal);
+	if(err == ccNoError) {
+		rc = afs_princ(&token_princ);
+		if (rc == KTC_NOENT)
+		{
+			// Get the principal for the default CC
+			err = cc_context_open_default_ccache(context, &defCcache);
+			if(err == ccNoError)
+				err = cc_ccache_get_principal(defCcache, cc_credentials_v5, &defPrincipal);
+			token_princ = defPrincipal->data;
+		}
+	}
 	
-	// If the tickets we're renewing are the same as the default
-	// tickets, then run aklog and wait for it to return
-	if(!strcmp(defPrincipal->data, principal->data)) {
-		if(0 == (pid = fork())) {
-			setenv("KRB5CCNAME", inCredentialsCache, TRUE);
-			if(execlp("aklog", "aklog", (char *) 0)) {
-				perror("aklog");
-				exit(1);
+	if(err == ccNoError) {
+		// If the tickets we're renewing are the same as the default
+		// tickets, then run aklog and wait for it to return
+		if(!strcmp(token_princ, principal->data)) {
+			if(0 == (pid = fork())) {
+				setenv("KRB5CCNAME", inCredentialsCache, TRUE);
+				if(execlp("aklog", "aklog", (char *) 0)) {
+					perror("aklog");
+					exit(1);
+				}
+			} else {
+				waitpid(pid, NULL, 0);
 			}
-		} else {
-			waitpid(pid, NULL, 0);
 		}
 	}
 	
 	// Cleanup!
+	if (token_princ != NULL && rc != KTC_NOENT)
+		free(token_princ);
 	if(defPrincipal != nil)
 		cc_string_release(defPrincipal);
 	if(defCcache != nil)
