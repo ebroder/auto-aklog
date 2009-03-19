@@ -1,0 +1,29 @@
+================
+About auto-aklog
+================
+
+The auto-aklog Kerberos extension will automatically renew your AFS
+tokens when your Kerberos tickets are acquired or renewed. It is
+recommended to use this plugin along with the Kerberos.app ticket
+manager to avoid having to worry about keeing tickets or tokens up to
+date.
+
+Currently, auto-aklog will run "aklog" any time your default
+credentials cache is renewed. To adjust which cells aklog acquires
+tokens for, you can create a file called ~/.xlog which lists one cell
+on each line.
+
+============
+Installation
+============
+
+To install the auto-aklog Kerberos extension:
+
+Run::
+
+    xcodebuild install DSTROOT=/
+
+then edit /Library/Preferences/edu.mit.Kerberos. Under the
+section labelled "[libdefaults]", add::
+
+    login_logout_notification = "auto-aklog"
