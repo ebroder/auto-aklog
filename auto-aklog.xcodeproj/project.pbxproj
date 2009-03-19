@@ -28,7 +28,7 @@
 		208361E70F32F8620032063B /* k4name_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = k4name_parse.c; sourceTree = "<group>"; };
 		208361F70F3300B70032063B /* afs_princ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = afs_princ.h; sourceTree = "<group>"; };
 		208361F80F3300B70032063B /* afs_princ.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = afs_princ.c; sourceTree = "<group>"; };
-		20B05AA30F72E3AD00A91C3E /* afs_princ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = afs_princ; sourceTree = BUILT_PRODUCTS_DIR; };
+		20B05AA30F72E3AD00A91C3E /* maybe_aklog */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = maybe_aklog; sourceTree = BUILT_PRODUCTS_DIR; };
 		20B05B700F72EFD400A91C3E /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		32DBCF630370AF2F00C91783 /* auto-aklog_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "auto-aklog_Prefix.pch"; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* auto-aklog.loginLogout */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "auto-aklog.loginLogout"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				8D5B49B6048680CD000E48DA /* auto-aklog.loginLogout */,
-				20B05AA30F72E3AD00A91C3E /* afs_princ */,
+				20B05AA30F72E3AD00A91C3E /* maybe_aklog */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,9 +139,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		20B05AA20F72E3AD00A91C3E /* afs_princ */ = {
+		20B05AA20F72E3AD00A91C3E /* maybe_aklog */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 20B05AA70F72E3CB00A91C3E /* Build configuration list for PBXNativeTarget "afs_princ" */;
+			buildConfigurationList = 20B05AA70F72E3CB00A91C3E /* Build configuration list for PBXNativeTarget "maybe_aklog" */;
 			buildPhases = (
 				20B05AA00F72E3AD00A91C3E /* Sources */,
 				20B05AA10F72E3AD00A91C3E /* Frameworks */,
@@ -150,9 +150,9 @@
 			);
 			dependencies = (
 			);
-			name = afs_princ;
+			name = maybe_aklog;
 			productName = afs_princ;
-			productReference = 20B05AA30F72E3AD00A91C3E /* afs_princ */;
+			productReference = 20B05AA30F72E3AD00A91C3E /* maybe_aklog */;
 			productType = "com.apple.product-type.tool";
 		};
 		8D5B49AC048680CD000E48DA /* auto-aklog */ = {
@@ -186,7 +186,7 @@
 			projectRoot = "";
 			targets = (
 				8D5B49AC048680CD000E48DA /* auto-aklog */,
-				20B05AA20F72E3AD00A91C3E /* afs_princ */,
+				20B05AA20F72E3AD00A91C3E /* maybe_aklog */,
 			);
 		};
 /* End PBXProject section */
@@ -318,7 +318,7 @@
 					"-lresolv",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = afs_princ;
+				PRODUCT_NAME = maybe_aklog;
 			};
 			name = Debug;
 		};
@@ -343,7 +343,7 @@
 					"-lresolv",
 				);
 				PREBINDING = NO;
-				PRODUCT_NAME = afs_princ;
+				PRODUCT_NAME = maybe_aklog;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -369,7 +369,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		20B05AA70F72E3CB00A91C3E /* Build configuration list for PBXNativeTarget "afs_princ" */ = {
+		20B05AA70F72E3CB00A91C3E /* Build configuration list for PBXNativeTarget "maybe_aklog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				20B05AA50F72E3AD00A91C3E /* Debug */,
