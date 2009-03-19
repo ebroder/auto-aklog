@@ -21,6 +21,7 @@
 #include <afs/param.h>
 #include <afs/auth.h>
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -138,14 +139,37 @@ int afs_princ(char ** princ) {
 
 int main(int argc, char **argv) {
 	int code;
+	pid_t pid;
 	char *princ;
 	
-	code = afs_princ(&princ);
-	if (code) {
-		afs_com_err("afs_princ", code, "");
+	if (argc < 3) {
+		fprintf(stderr, "Usage: %s <krb5_princ> <is_default (0 or 1)>\n", argv[0]);
 		return 1;
 	}
-	printf("%s\n", princ);
+	
+	code = afs_princ(&princ);
+	if (code == KTC_NOENT && !strcmp(argv[2], "1")) {
+		princ = strdup(argv[1]);
+		if (!princ) {
+			return errno;
+		}
+	}
+	else if (code) {
+		afs_com_err("afs_princ", code, "while looking up AFS token principal");
+		return 1;
+	}
+	
+	// Test if the two principals are the same - if they are, then run aklog
+	if (!strcmp(argv[1], princ)) {
+		if(0 == (pid = fork())) {
+			if(execlp("aklog", "aklog", (char *) 0)) {
+				perror("aklog");
+				exit(1);
+			}
+		} else {
+			waitpid(pid, NULL, 0);
+		}
+	}
 	free(princ);
 	return 0;
 }
