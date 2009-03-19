@@ -35,69 +35,18 @@ KLStatus KerberosLoginNotification_Login(
 	KLN_LoginType inLoginType,
 	const char * inCredentialsCache)
 {
-	cc_context_t context = nil;
-	cc_ccache_t ccache = nil, defCcache = nil;
-	cc_string_t principal = nil, defPrincipal = nil;
-	char * token_princ = NULL;
-	int rc;
 	pid_t pid;
 	
-	// Apparently the OS X ccache API is /retarded/ and requires
-	// you to strip the "API:"
-	const char * shortCache = strchr(inCredentialsCache, ':');
-	if(!shortCache || !(*++shortCache)) return 0;
-	
-	// Initialize a cc context
-	cc_int32 err = cc_initialize(&context, ccapi_version_4, nil, nil);
-	
-	// Get the principal for the CC that's currently being
-	// obtained
-	if(err == ccNoError)
-		err = cc_context_open_ccache(context, shortCache, &ccache);
-	if(err == ccNoError)
-		err = cc_ccache_get_principal(ccache, cc_credentials_v5, &principal);
-	
-	if(err == ccNoError) {
-		rc = afs_princ(&token_princ);
-		if (rc == KTC_NOENT)
-		{
-			// Get the principal for the default CC
-			err = cc_context_open_default_ccache(context, &defCcache);
-			if(err == ccNoError)
-				err = cc_ccache_get_principal(defCcache, cc_credentials_v5, &defPrincipal);
-			token_princ = defPrincipal->data;
+	if(0 == (pid = fork())) {
+		setenv("KRB5CCNAME", inCredentialsCache, TRUE);
+		if(execlp("/Library/Kerberos Plug-Ins/auto-aklog.loginLogout/Contents/MacOS/maybe_aklog", "maybe_aklog", (char *) 0)) {
+			perror("maybe_aklog");
+			exit(1);
 		}
+	} else {
+		waitpid(pid, NULL, 0);
 	}
-	
-	if(err == ccNoError) {
-		// If the tickets we're renewing are the same as the default
-		// tickets, then run aklog and wait for it to return
-		if(!strcmp(token_princ, principal->data)) {
-			if(0 == (pid = fork())) {
-				setenv("KRB5CCNAME", inCredentialsCache, TRUE);
-				if(execlp("aklog", "aklog", (char *) 0)) {
-					perror("aklog");
-					exit(1);
-				}
-			} else {
-				waitpid(pid, NULL, 0);
-			}
-		}
-	}
-	
-	// Cleanup!
-	if (token_princ != NULL && rc != KTC_NOENT)
-		free(token_princ);
-	if(defPrincipal != nil)
-		cc_string_release(defPrincipal);
-	if(defCcache != nil)
-		cc_ccache_release(defCcache);
-	if(principal != nil)
-		cc_string_release(principal);
-	if(ccache != nil)
-		cc_ccache_release(ccache);
-	if(context != nil)
-		cc_context_release(context);
+
     return 0;
 }
 
