@@ -8,10 +8,10 @@ recommended to use this plugin along with the Kerberos.app ticket
 manager to avoid having to worry about keeing tickets or tokens up to
 date.
 
-Currently, auto-aklog will run "aklog" any time your default
-credentials cache is renewed. To adjust which cells aklog acquires
-tokens for, you can create a file called ~/.xlog which lists one cell
-on each line.
+Currently, auto-aklog will test to see if you currently have
+un-expired tokens. If you do, it will only re-acquire tokens from the
+principal whose tokens you currently hold. If you have no tokens, it
+will get tokens for your default credential cache.
 
 ============
 Installation
