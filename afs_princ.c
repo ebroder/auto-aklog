@@ -21,6 +21,7 @@
 #include <afs/param.h>
 #include <afs/auth.h>
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -132,5 +133,19 @@ int afs_princ(char ** princ) {
 	afsconf_Close(tdir);
 	krb5_free_context(context);
 
+	return 0;
+}
+
+int main(int argc, char **argv) {
+	int code;
+	char *princ;
+	
+	code = afs_princ(&princ);
+	if (code) {
+		afs_com_err("afs_princ", code, "");
+		return 1;
+	}
+	printf("%s\n", princ);
+	free(princ);
 	return 0;
 }
