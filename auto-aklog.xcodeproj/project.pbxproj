@@ -13,9 +13,33 @@
 		20B05ABF0F72E41100A91C3E /* k4name_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 208361E70F32F8620032063B /* k4name_parse.c */; };
 		20B05AC00F72E41100A91C3E /* afs_princ.c in Sources */ = {isa = PBXBuildFile; fileRef = 208361F80F3300B70032063B /* afs_princ.c */; };
 		20B05B710F72EFD400A91C3E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 20B05B700F72EFD400A91C3E /* main.c */; };
+		20B05BA40F72F33500A91C3E /* maybe_aklog in CopyFiles */ = {isa = PBXBuildFile; fileRef = 20B05AA30F72E3AD00A91C3E /* maybe_aklog */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20B05BB70F72F44C00A91C3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20B05AA20F72E3AD00A91C3E /* maybe_aklog */;
+			remoteInfo = maybe_aklog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		20B05BA30F72F31F00A91C3E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				20B05BA40F72F33500A91C3E /* maybe_aklog in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -162,10 +186,12 @@
 				8D5B49AF048680CD000E48DA /* Resources */,
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
+				20B05BA30F72F31F00A91C3E /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				20B05BB80F72F44C00A91C3E /* PBXTargetDependency */,
 			);
 			name = "auto-aklog";
 			productInstallPath = "$(HOME)/Library/Bundles";
@@ -222,6 +248,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20B05BB80F72F44C00A91C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20B05AA20F72E3AD00A91C3E /* maybe_aklog */;
+			targetProxy = 20B05BB70F72F44C00A91C3E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
@@ -319,6 +353,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = maybe_aklog;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -344,6 +379,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = maybe_aklog;
+				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
 			};
 			name = Release;
