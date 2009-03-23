@@ -3,10 +3,9 @@ About auto-aklog
 ================
 
 The auto-aklog Kerberos extension will automatically renew your AFS
-tokens when your Kerberos tickets are acquired or renewed. It is
-recommended to use this plugin along with the Kerberos.app ticket
-manager to avoid having to worry about keeing tickets or tokens up to
-date.
+tokens when your Kerberos tickets are acquired or renewed. I recommend
+using this plugin along with the Kerberos.app ticket manager to avoid
+having to worry about keeping tickets or tokens up to date.
 
 Currently, auto-aklog will test to see if you currently have
 un-expired tokens. If you do, it will only re-acquire tokens from the
@@ -27,3 +26,10 @@ then edit /Library/Preferences/edu.mit.Kerberos. Under the
 section labelled "[libdefaults]", add::
 
     login_logout_notification = "auto-aklog"
+
+====
+Bugs
+====
+
+If you find any bugs in auto-aklog, please report them at
+http://bugs.ebroder.net/projects/auto-aklog
