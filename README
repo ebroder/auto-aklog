@@ -27,3 +27,10 @@ then edit /Library/Preferences/edu.mit.Kerberos. Under the
 section labelled "[libdefaults]", add::
 
     login_logout_notification = "auto-aklog"
+
+====
+Bugs
+====
+
+If you find any bugs in auto-aklog, please report them at
+http://bugs.ebroder.net/projects/auto-aklog
