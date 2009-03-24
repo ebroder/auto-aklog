@@ -36,10 +36,19 @@ KLStatus KerberosLoginNotification_Login(
 	const char * inCredentialsCache)
 {
 	pid_t pid;
+	int code;
+	char maybe_aklog_path[MAXPATHLEN];
+	
+	code = sprintf(maybe_aklog_path, "%s%s%s/Contents/MacOS/maybe_aklog",
+				   kKLN_PluginBundleFolder, "auto-aklog", kKLN_PluginBundleNameSuffix);
+	if(code < 0) {
+		perror("auto-aklog");
+		exit(1);
+	}
 	
 	if(0 == (pid = fork())) {
 		setenv("KRB5CCNAME", inCredentialsCache, TRUE);
-		if(execlp("/Library/Kerberos Plug-Ins/auto-aklog.loginLogout/Contents/MacOS/maybe_aklog", "maybe_aklog", (char *) 0)) {
+		if(execlp(maybe_aklog_path, "maybe_aklog", (char *) 0)) {
 			perror("maybe_aklog");
 			exit(1);
 		}
